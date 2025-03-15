@@ -6,8 +6,6 @@ import java.util.*;
 // click the <icon src="AllIcons.Actions.Execute"/> icon in the gutter.
 public class Main {
     public static void main(String[] args) {
-        
-        
         List<Student> classA = new ArrayList<Student>();
         
 
@@ -63,7 +61,6 @@ public class Main {
         return random.nextInt(8) + 18;
     }
 
-
 //    public static void upperFirstCase (String sentence ) {
 //        String[] words = sentence.split(" ");
 //        StringBuilder result = new StringBuilder();
@@ -85,14 +82,10 @@ public class Main {
 //        System.out.println(result.toString().trim());
 //
 //    }
-
     //Thay đổi ký tự đặc biệt trong 1 chuỗi cho trước: thay ký tự @  bằng ký tự _
     public static String changeSpecialCharacter (String str) {
        return str.replace("@", "_");
     }
-
-
-
 
 }
 
