@@ -10,8 +10,8 @@ public class BasicAuthenticationTest {
     @Test
     void verifyLoginSuccessWithValidCredentials(){
         WebDriver driver = new ChromeDriver();
-
         driver.get("https://admin:admin@the-internet.herokuapp.com/basic_auth");
+
         String welcomeMessage = driver.findElement(By.tagName("p")).getText();
         Assert.assertTrue(welcomeMessage.contains("Congratulations! You must have the proper credentials."));
 

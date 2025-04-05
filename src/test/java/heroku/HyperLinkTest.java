@@ -16,7 +16,7 @@ import static org.openqa.selenium.support.ui.ExpectedCondition.*;
 public class HyperLinkTest {
 
     @Test
-    void tc01() {
+    void verifyLinkGoToCorrectScreen() {
 
 //        Open browser
 //        Navigate to https://the-internet.herokuapp.com/status_codes
@@ -54,16 +54,19 @@ public class HyperLinkTest {
 
         driver.findElement(By.linkText("404")).click();
         Assert.assertEquals(driver.getCurrentUrl(), "https://the-internet.herokuapp.com/status_codes/404");
+        wait.until(ExpectedConditions.visibilityOf(driver.findElement(By.id("content"))));
+        Assert.assertTrue(content.contains("This page returned a 304 status code"));
         driver.findElement(By.linkText("here")).click();
 
         driver.findElement(By.linkText("500")).click();
         Assert.assertEquals(driver.getCurrentUrl(), "https://the-internet.herokuapp.com/status_codes/500");
+        wait.until(ExpectedConditions.visibilityOf(driver.findElement(By.id("content"))));
+        Assert.assertTrue(content.contains("This page returned a 500 status code"));
         driver.findElement(By.linkText("here")).click();
         Assert.assertEquals(driver.getCurrentUrl(), "https://the-internet.herokuapp.com/status_codes");
 
 
         driver.quit();
-
 
     }
 }

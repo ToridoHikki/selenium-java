@@ -22,10 +22,7 @@ public class FormAuthenticationTest {
     void tc01 () throws InterruptedException {
         WebDriver driver = new ChromeDriver();
         driver.get("https://the-internet.herokuapp.com/login");
-//        driver.findElement(By.cssSelector("input#username")).sendKeys("tomsmith!");
-//        driver.findElement(By.xpath("//input[@name='username']")).sendKeys("tomsmith");
-//        driver.findElement(By.cssSelector("input[name=password]")).sendKeys("SuperSecretPassword!");
-//        driver.findElement(By.xpath("//*[@type='password']")).sendKeys("SuperSecretPassword!");
+        driver.findElement(By.xpath("//*[@type='password']")).sendKeys("SuperSecretPassword!");
         driver.findElement(By.id("username")).sendKeys("tomsmith");
         driver.findElement(By.id("password")).sendKeys("SuperSecretPassword!");
         driver.findElement(By.cssSelector("button[type=submit]")).click();
@@ -34,17 +31,8 @@ public class FormAuthenticationTest {
         Assert.assertEquals(driver.getCurrentUrl(), "https://the-internet.herokuapp.com/secure");
         Assert.assertTrue(driver.findElement(By.id("flash")).isDisplayed());
         Assert.assertTrue(driver.findElement(By.tagName("h4")).getText().contains("Welcome to the Secure Area. When you are done click logout below."));
-//        Assert.assertEquals(driver.findElement(By.tagName("h4")).getText(), "Welcome to the Secure Area. When you are done click logout below.");
+
         driver.quit();
-
-
-
-
-
-
-
-
-
 
     }
 }

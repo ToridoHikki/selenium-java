@@ -24,21 +24,17 @@ public class CheckboxTest {
         WebDriver driver = new ChromeDriver();
         driver.get("https://the-internet.herokuapp.com/checkboxes");
 
-        // Check checkbox1
         WebElement checkbox1 = driver.findElement(By.cssSelector("input[type=checkbox]:nth-child(1)"));
         check(checkbox1);
         Assert.assertTrue(checkbox1.isSelected());
 
-        // Check checkbox2
         WebElement checkbox2 = driver.findElement(By.xpath("//form[@id='checkboxes']/input[2]"));
         check(checkbox2);
         Assert.assertTrue(checkbox2.isSelected());
 
-        // Uncheck checkbox1
         uncheck(checkbox1);
         Assert.assertFalse(checkbox1.isSelected());
 
-        // Uncheck checkbox2
         uncheck(checkbox2);
         Assert.assertFalse(checkbox2.isSelected());
 
@@ -86,7 +82,6 @@ public class CheckboxTest {
         driver.findElement(By.cssSelector("button[data-test=check-all-button]")).click();
 
         WebElement cb1 = driver.findElement(By.cssSelector("input[data-test=checkbox-checkbox1]"));
-//        WebElement cb1 = driver.findElement(By.xpath("//input[@data-test='checkbox-checkbox1']"));
         WebElement cb2 = driver.findElement(By.cssSelector("input[data-test=checkbox-checkbox2]"));
         WebElement cb3 = driver.findElement(By.cssSelector("input[data-test=checkbox-checkbox3]"));
 

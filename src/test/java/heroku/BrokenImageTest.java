@@ -14,6 +14,7 @@ public class BrokenImageTest {
     void verifyBrokenImage(){
         WebDriver driver = new ChromeDriver();
         driver.get("https://the-internet.herokuapp.com/broken_images");
+
         List<WebElement> images = driver.findElements(By.cssSelector(".example img"));
         images.forEach(image -> {
             String imageUrl = image.getDomAttribute("src");
@@ -24,8 +25,10 @@ public class BrokenImageTest {
             System.out.println("Natural Width: " + naturalWidth);
             System.out.println("Natural Height: " + naturalHeight);
         });
+
         Assert.assertEquals(images.get(0).getDomProperty("naturalWidth"), "0");
         Assert.assertEquals(images.get(1).getDomProperty("naturalWidth"), "0");
+
         driver.quit();
     }
 
