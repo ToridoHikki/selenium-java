@@ -40,11 +40,11 @@ public class HyperLinkTest {
         driver.findElement(By.linkText("200")).click();
         Assert.assertEquals(driver.getCurrentUrl(), "https://the-internet.herokuapp.com/status_codes/200");
         wait.until(ExpectedConditions.visibilityOf(driver.findElement(By.id("content"))));
-        driver.findElement(By.linkText("here")).click();
         String content = driver.findElement(By.id("content")).getText();
         Assert.assertTrue(content.contains("This page returned a 200 status code"));
+        driver.findElement(By.linkText("here")).click();
 
-        
+
         driver.findElement(By.linkText("301")).click();
         Assert.assertEquals(driver.getCurrentUrl(), "https://the-internet.herokuapp.com/status_codes/301");
         wait.until(ExpectedConditions.visibilityOf(driver.findElement(By.id("content"))));
@@ -60,8 +60,6 @@ public class HyperLinkTest {
         Assert.assertEquals(driver.getCurrentUrl(), "https://the-internet.herokuapp.com/status_codes/500");
         driver.findElement(By.linkText("here")).click();
         Assert.assertEquals(driver.getCurrentUrl(), "https://the-internet.herokuapp.com/status_codes");
-
-
 
 
         driver.quit();
