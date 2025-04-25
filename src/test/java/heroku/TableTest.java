@@ -32,6 +32,7 @@ public class TableTest {
                 .stream()
                 .mapToDouble(Person::getDue)
                 .max();
+
         List<Person> maxDuePersons = people
                 .stream()
                 .filter(p -> p.getDue() == maxDue.getAsDouble())
@@ -73,7 +74,7 @@ public class TableTest {
                 //chuyen ve list
                 .toList();
 
-        //Todo: tim maxDue trong due
+        //Todo: tim minDue trong due
         OptionalDouble minDue = people
                 .stream()
                 .mapToDouble(p -> p.getDue())
@@ -91,5 +92,7 @@ public class TableTest {
                 .stream()
                 .map(p -> p.getFullName()).toList(), List.of("Smith John", "Conway Tim"));
     }
+
+
 
 }

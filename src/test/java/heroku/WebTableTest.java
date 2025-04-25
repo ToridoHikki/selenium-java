@@ -7,9 +7,7 @@ import org.openqa.selenium.chrome.ChromeDriver;
 import org.testng.Assert;
 import org.testng.annotations.Test;
 
-import java.util.Collection;
-import java.util.Collections;
-import java.util.List;
+import java.util.*;
 import java.util.stream.Collectors;
 
 public class WebTableTest {
@@ -94,8 +92,29 @@ public class WebTableTest {
 
         Assert.assertEquals(names, List.of("Smith John", "Conway Tim"));
 
-
-
     }
+//    @Test
+//    void tc07(){
+//        WebDriver driver = new ChromeDriver();
+//        driver.get("https://the-internet.herokuapp.com/tables");
+//
+//        List<Person> personList = new ArrayList<>();
+//
+//        driver.findElements(By.xpath("//table[@id='table1']/tbody/tr"))
+//                .forEach(row -> {
+//                    String lastName = row.findElement(By.xpath("./td[1]")).getText();
+//                    String firstName = row.findElement(By.xpath("./td[2]")).getText();
+//                    double due = Double.parseDouble(row.findElement(By.xpath("./td[4]")).getText().replace("$", ""));
+//                    personList.add(new Person( firstName,lastName, due));
+//                });
+//        double minDue = personList.stream().min(Comparator.comparing(Person::getDue)).get().getDue();
+//        List<String> listPersonHaveMinDue  = personList.stream()
+//                .filter(p -> p.getDue() == minDue)
+//                .map(Person::getFullName)
+//                .toList();
+//
+//        Assert.assertEquals(listPersonHaveMinDue, List.of("John Smith","Tim Conway"));
+//        driver.quit();
+//    }
 
 }
