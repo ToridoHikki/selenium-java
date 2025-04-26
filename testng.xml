@@ -1,0 +1,8 @@
+<suite name = "TVN Test Suite">
+    <test name = "TVN Test">
+        <packages>
+            <class name = "heroku"/>
+        </packages>
+    </test>
+
+</suite>

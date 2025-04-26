@@ -1,0 +1,8 @@
+<suite name="Form Authentication">
+    <test name="Chrome Browser Test">
+        <parameter name="browser" value="chrome"/>
+        <classes>
+            <class name="heroku.FormAuthenticationTest"/>
+        </classes>
+    </test>
+</suite>

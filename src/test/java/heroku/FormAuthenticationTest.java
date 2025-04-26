@@ -5,6 +5,10 @@ import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.chrome.ChromeDriver;
 import org.testng.Assert;
 import org.testng.annotations.Test;
+import pages.heroku.FormAuthenticationPage;
+
+import static utils.Browser.getCurrentUrl;
+import static utils.Browser.openBrowser;
 
 //import static com.sun.org.apache.xpath.internal.compiler.Token.contains;
 
@@ -18,9 +22,11 @@ public class FormAuthenticationTest {
         6. And the home page is appear
      */
 
+//    @Parameters({"browser"})
     @Test
-    void tc01 () throws InterruptedException {
+    void tc01 (String browser) throws InterruptedException {
         WebDriver driver = new ChromeDriver();
+
         driver.get("https://the-internet.herokuapp.com/login");
         driver.findElement(By.xpath("//*[@type='password']")).sendKeys("SuperSecretPassword!");
         driver.findElement(By.id("username")).sendKeys("tomsmith");
@@ -34,5 +40,18 @@ public class FormAuthenticationTest {
 
         driver.quit();
 
+    }
+
+    @Test
+    void pageObject() throws InterruptedException {
+        openBrowser("chrome");
+        FormAuthenticationPage formAuthenticationPage = new FormAuthenticationPage();
+
+        formAuthenticationPage.open();
+        formAuthenticationPage.login("tomsmith", "SuperSecretPassword!");
+
+        Thread.sleep(2000);
+        Assert.assertEquals(getCurrentUrl(), "https://the-internet.herokuapp.com/secure");
+        Assert.assertEquals(formAuthenticationPage.getWelcomeMessage(), "Welcome to the Secure Area. When you are done click logout below.");
     }
 }
