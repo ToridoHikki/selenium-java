@@ -1,59 +1,43 @@
 package heroku;
 
-import org.openqa.selenium.By;
-import org.openqa.selenium.WebDriver;
-import org.openqa.selenium.chrome.ChromeDriver;
+import common.TestBase;
 import org.testng.Assert;
+import org.testng.annotations.AfterClass;
+import org.testng.annotations.BeforeClass;
 import org.testng.annotations.Parameters;
 import org.testng.annotations.Test;
 import pages.heroku.FormAuthenticationPage;
 
-import static utils.Browser.getCurrentUrl;
-import static utils.Browser.openBrowser;
+import static utils.Browser.*;
 
 //import static com.sun.org.apache.xpath.internal.compiler.Token.contains;
 
-public class FormAuthenticationTest {
-    /*
-        1.Open browser
-        2. Navigate to https://the-internet.herokuapp.com/login
-        3. Fill in username with tomsmith
-        4. Fill in the password with SuperSecretPassword!
-        5. Click on Login button
-        6. And the home page is appear
-     */
+public class FormAuthenticationTest  extends TestBase {
+
+    FormAuthenticationPage formAuthenticationPage;
+
+    @BeforeClass
+
+    void setup() {
+        openBrowser("chrome");
+        formAuthenticationPage = new FormAuthenticationPage();
+    }
 
     @Parameters({"browser"})
     @Test
-    void tc01 (String browser) throws InterruptedException {
+    void verifyForm(String browser) throws InterruptedException {
+        formAuthenticationPage
+                .open()
+                .login("tomsmith","SuperSecretPassword!");
 
-        WebDriver driver = openBrowser(browser);
-
-        driver.get("https://the-internet.herokuapp.com/login");
-        driver.findElement(By.xpath("//*[@type='password']")).sendKeys("SuperSecretPassword!");
-        driver.findElement(By.id("username")).sendKeys("tomsmith");
-        driver.findElement(By.id("password")).sendKeys("SuperSecretPassword!");
-        driver.findElement(By.cssSelector("button[type=submit]")).click();
-
-        Thread.sleep(2000);
-        Assert.assertEquals(driver.getCurrentUrl(), "https://the-internet.herokuapp.com/secure");
-        Assert.assertTrue(driver.findElement(By.id("flash")).isDisplayed());
-        Assert.assertTrue(driver.findElement(By.tagName("h4")).getText().contains("Welcome to the Secure Area. When you are done click logout below."));
-
-        driver.quit();
-
+        Assert.assertTrue(formAuthenticationPage
+                .getWelcomeMessage()
+                .contains("Welcome to the Secure Area. When you are done click logout below."));
+        Assert.assertEquals(getCurrentUrl(), "https://the-internet.herokuapp.com/secure");
     }
 
-    @Test
-    void pageObject() throws InterruptedException {
-        openBrowser("chrome");
-        FormAuthenticationPage formAuthenticationPage = new FormAuthenticationPage();
-
-        formAuthenticationPage.open();
-        formAuthenticationPage.login("tomsmith", "SuperSecretPassword!");
-
-        Thread.sleep(2000);
-        Assert.assertEquals(getCurrentUrl(), "https://the-internet.herokuapp.com/secure");
-        Assert.assertEquals(formAuthenticationPage.getWelcomeMessage(), "Welcome to the Secure Area. When you are done click logout below.");
+    @AfterClass
+    void tearDown() {
+        quit();
     }
 }
