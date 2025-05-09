@@ -27,7 +27,7 @@ public class Browser {
      return WebDriver
      static method
      */
-    public static void openBrowser(String browser) {
+    public static WebDriver openBrowser(String browser) {
         switch (browser.toLowerCase()) {
             case "chrome":
                 ChromeOptions option = new ChromeOptions();
@@ -48,6 +48,7 @@ public class Browser {
                 break;
         }
         wait = new WebDriverWait(driver, Duration.ofSeconds(30));
+        return driver;
     }
 
     public static WebDriver getDriver() {

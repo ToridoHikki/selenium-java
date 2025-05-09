@@ -1,4 +1,4 @@
-package caculator;
+package calculator;
 
 import org.testng.Assert;
 import org.testng.annotations.AfterMethod;

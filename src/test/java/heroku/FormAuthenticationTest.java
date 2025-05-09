@@ -4,6 +4,7 @@ import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.chrome.ChromeDriver;
 import org.testng.Assert;
+import org.testng.annotations.Parameters;
 import org.testng.annotations.Test;
 import pages.heroku.FormAuthenticationPage;
 
@@ -22,10 +23,11 @@ public class FormAuthenticationTest {
         6. And the home page is appear
      */
 
-//    @Parameters({"browser"})
+    @Parameters({"browser"})
     @Test
     void tc01 (String browser) throws InterruptedException {
-        WebDriver driver = new ChromeDriver();
+
+        WebDriver driver = openBrowser(browser);
 
         driver.get("https://the-internet.herokuapp.com/login");
         driver.findElement(By.xpath("//*[@type='password']")).sendKeys("SuperSecretPassword!");
