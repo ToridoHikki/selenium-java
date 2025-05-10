@@ -9,16 +9,9 @@
 name: Java CI with Maven
 
 on:
-  push:
-    branches: [ "ak48-selenium" ]
   pull_request:
     branches: [ "main" ]
   workflow_dispatch:
-    inputs:
-      testplan:
-        description: 'Test plan to run'
-        required: true
-        default: 'login-testplan.xml'
 
 jobs:
   build:
