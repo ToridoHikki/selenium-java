@@ -13,6 +13,12 @@ on:
     branches: [ "ak48-selenium" ]
   pull_request:
     branches: [ "main" ]
+  workdflow_dispatch:
+    inputs:
+      testplan:
+        description: 'Test plan to run'
+        required: true
+        default: 'login-testplan.xml'
 
 jobs:
   build:
