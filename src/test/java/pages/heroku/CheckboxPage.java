@@ -13,24 +13,29 @@ public class CheckboxPage {
         visit("https://the-internet.herokuapp.com/checkboxes");
     }
 
-    public void check(Checkbox checkboxName) {
-        Browser.check(checkboxName.getLocator());
+//    public void check(Checkbox checkboxName) {
+//        Browser.check(checkboxName.getLocator());
+//    }
+//
+//    public void uncheck(Checkbox checkboxName) {
+//        Browser.uncheck(checkboxName.getLocator());
+//    }
+//
+//    public boolean isChecked(Checkbox checkboxName) {
+//        return Browser.isSelected(checkboxName.getLocator());
+//    }
+
+    public void check(String checkboxName){
+        Browser.check(By.cssSelector(String.format("input[type=checkbox]:nth-child(%s)", checkboxName)));
     }
 
-
-
-    public void uncheck(Checkbox checkboxName) {
-        Browser.uncheck(checkboxName.getLocator());
+    public void uncheck(String checkboxName){
+        Browser.uncheck(By.cssSelector(String.format("input[type=checkbox]:nth-child(%s)", checkboxName)));
     }
 
-    public boolean isChecked(Checkbox checkboxName) {
-        return Browser.isSelected(checkboxName.getLocator());
+    public boolean isChecked(String checkboxName){
+        return Browser.isSelected(By.cssSelector(String.format("input[type=checkbox]:nth-child(%s)", checkboxName)));
     }
 
-    public void checkAll() {
-    }
-
-    public void uncheckAll() {
-    }
 
 }

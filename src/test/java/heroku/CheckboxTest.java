@@ -5,11 +5,12 @@ import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.chrome.ChromeDriver;
 import org.testng.Assert;
+import org.testng.annotations.AfterMethod;
 import org.testng.annotations.Test;
 import pages.heroku.CheckboxPage;
+import pages.moatazeldebsy.CheckboxesPage;
 
-import static utils.Browser.openBrowser;
-import static utils.Browser.visit;
+import static utils.Browser.*;
 
 
 public class CheckboxTest {
@@ -26,91 +27,64 @@ public class CheckboxTest {
 //        Verify checkbox1 is checked
 //        Check on checkbox2
 //        Verify checkbox2 is checked
-
         openBrowser("chrome");
         CheckboxPage checkboxPage = new CheckboxPage();
         checkboxPage.open();
 
-        checkboxPage.check(Checkbox.CHECKBOX1);
-        Assert.assertTrue(checkboxPage.isChecked(Checkbox.CHECKBOX1));
+        checkboxPage.check("1");
+        Assert.assertTrue(checkboxPage.isChecked("1"));
 
-        checkboxPage.check(Checkbox.CHECKBOX2);
-        Assert.assertTrue(checkboxPage.isChecked(Checkbox.CHECKBOX2));
+        checkboxPage.check("3");
+        Assert.assertTrue(checkboxPage.isChecked("3"));
 
-        checkboxPage.uncheck(Checkbox.CHECKBOX1);
-        Assert.assertFalse(checkboxPage.isChecked(Checkbox.CHECKBOX1));
+        checkboxPage.uncheck("1");
+        Assert.assertFalse(checkboxPage.isChecked("1"));
 
-        checkboxPage.uncheck(Checkbox.CHECKBOX2);
-        Assert.assertFalse(checkboxPage.isChecked(Checkbox.CHECKBOX2));
+        checkboxPage.uncheck("3");
+        Assert.assertFalse(checkboxPage.isChecked("3"));
     }
 
     @Test
     void verify3CheckBox() throws InterruptedException {
+        openBrowser("chrome");
+        CheckboxesPage checkboxesPage= new CheckboxesPage();
+        checkboxesPage.open();
 
-        WebDriver driver = new ChromeDriver();
-        driver.get("https://moatazeldebsy.github.io/test-automation-practices/#/checkboxes");
+        checkboxesPage.checkAll();
+        Assert.assertTrue(checkboxesPage.isChecked("1"));
+        Assert.assertTrue(checkboxesPage.isChecked("2"));
+        Assert.assertTrue(checkboxesPage.isChecked("3"));
 
-        WebElement cb1 = driver.findElement(By.cssSelector("input[data-test=checkbox-checkbox1]"));
-//        WebElement cb1 = driver.findElement(By.xpath("//input[@data-test='checkbox-checkbox1']"));
-        WebElement cb2 = driver.findElement(By.cssSelector("input[data-test=checkbox-checkbox2]"));
-        WebElement cb3 = driver.findElement(By.cssSelector("input[data-test=checkbox-checkbox3]"));
-
-        check(cb1);
-        Assert.assertTrue(cb1.isSelected());
-
-        check(cb2);
-        Assert.assertTrue(cb2.isSelected());
-
-        check(cb3);
-        Assert.assertTrue(cb3.isSelected());
-
-        uncheck(cb1);
-        Assert.assertFalse(cb1.isSelected());
-
-        uncheck(cb2);
-        Assert.assertFalse(cb2.isSelected());
-
-        uncheck(cb3);
-        Assert.assertFalse(cb3.isSelected());
-
-        driver.quit();
-
+        checkboxesPage.uncheckAll();
+        Assert.assertFalse(checkboxesPage.isChecked("1"));
+        Assert.assertFalse(checkboxesPage.isChecked("2"));
+        Assert.assertFalse(checkboxesPage.isChecked("3"));
     }
 
     @Test
     void verifyCheckAllButtonWorking () throws InterruptedException {
-        WebDriver driver = new ChromeDriver();
-        driver.get("https://moatazeldebsy.github.io/test-automation-practices/#/checkboxes");
+        openBrowser("chrome");
+        CheckboxesPage checkboxesPage = new CheckboxesPage();
+        checkboxesPage.open();
 
-        driver.findElement(By.cssSelector("button[data-test=check-all-button]")).click();
+        checkboxesPage.checkAll();
+        Assert.assertTrue(checkboxesPage.isChecked("1"));
+        Assert.assertTrue(checkboxesPage.isChecked("2"));
+        Assert.assertTrue(checkboxesPage.isChecked("3"));
 
-        WebElement cb1 = driver.findElement(By.cssSelector("input[data-test=checkbox-checkbox1]"));
-        WebElement cb2 = driver.findElement(By.cssSelector("input[data-test=checkbox-checkbox2]"));
-        WebElement cb3 = driver.findElement(By.cssSelector("input[data-test=checkbox-checkbox3]"));
-
-        Assert.assertTrue(cb1.isSelected());
-        Assert.assertTrue(cb2.isSelected());
-        Assert.assertTrue(cb3.isSelected());
-
-        driver.quit();
     }
 
     @Test
     void verifyUncheckAllButtonWorking () throws InterruptedException {
-        WebDriver driver = new ChromeDriver();
-        driver.get("https://moatazeldebsy.github.io/test-automation-practices/#/checkboxes");
+        openBrowser("chrome");
+        CheckboxesPage checkboxesPage= new CheckboxesPage();
+        checkboxesPage.open();
 
-        driver.findElement(By.cssSelector("button[data-test=check-all-button]")).click();
-        driver.findElement(By.cssSelector("button[data-test=uncheck-all-button]")).click();
-
-        WebElement cb1 = driver.findElement(By.cssSelector("input[data-test=checkbox-checkbox1]"));
-//        WebElement cb1 = driver.findElement(By.xpath("//input[@data-test='checkbox-checkbox1']"));
-        WebElement cb2 = driver.findElement(By.cssSelector("input[data-test=checkbox-checkbox2]"));
-        WebElement cb3 = driver.findElement(By.cssSelector("input[data-test=checkbox-checkbox3]"));
-
-        Assert.assertFalse(cb1.isSelected() );
-        Assert.assertFalse(cb1.isSelected() && cb2.isSelected() && cb3.isSelected());
-        Assert.assertFalse(cb1.isSelected() && cb2.isSelected() && cb3.isSelected());
+        checkboxesPage.checkAll();
+        checkboxesPage.uncheckAll();
+        Assert.assertFalse(checkboxesPage.isChecked("1"));
+        Assert.assertFalse(checkboxesPage.isChecked("2"));
+        Assert.assertFalse(checkboxesPage.isChecked("3"));
     }
 
     private void check(WebElement checkbox) {
@@ -123,6 +97,11 @@ public class CheckboxTest {
         if (checkbox.isSelected()) {
             checkbox.click();
         }
+    }
+
+    @AfterMethod
+    public void tearDown() {
+        quit();
     }
 
 }
