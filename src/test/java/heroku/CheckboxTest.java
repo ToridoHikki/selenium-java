@@ -4,15 +4,21 @@ import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.chrome.ChromeDriver;
-import org.openqa.selenium.chromium.ChromiumDriver;
 import org.testng.Assert;
 import org.testng.annotations.Test;
+import pages.heroku.CheckboxPage;
+
+import static utils.Browser.openBrowser;
+import static utils.Browser.visit;
 
 
 public class CheckboxTest {
 
+
+
     @Test
     void tc02() throws InterruptedException {
+
 //        TC02: Checkboxes : Check to a box
 //        Open browser
 //        Navigate to https://the-internet.herokuapp.com/checkboxes
@@ -21,24 +27,21 @@ public class CheckboxTest {
 //        Check on checkbox2
 //        Verify checkbox2 is checked
 
-        WebDriver driver = new ChromeDriver();
-        driver.get("https://the-internet.herokuapp.com/checkboxes");
+        openBrowser("chrome");
+        CheckboxPage checkboxPage = new CheckboxPage();
+        checkboxPage.open();
 
-        WebElement checkbox1 = driver.findElement(By.cssSelector("input[type=checkbox]:nth-child(1)"));
-        check(checkbox1);
-        Assert.assertTrue(checkbox1.isSelected());
+        checkboxPage.check(Checkbox.CHECKBOX1);
+        Assert.assertTrue(checkboxPage.isChecked(Checkbox.CHECKBOX1));
 
-        WebElement checkbox2 = driver.findElement(By.xpath("//form[@id='checkboxes']/input[2]"));
-        check(checkbox2);
-        Assert.assertTrue(checkbox2.isSelected());
+        checkboxPage.check(Checkbox.CHECKBOX2);
+        Assert.assertTrue(checkboxPage.isChecked(Checkbox.CHECKBOX2));
 
-        uncheck(checkbox1);
-        Assert.assertFalse(checkbox1.isSelected());
+        checkboxPage.uncheck(Checkbox.CHECKBOX1);
+        Assert.assertFalse(checkboxPage.isChecked(Checkbox.CHECKBOX1));
 
-        uncheck(checkbox2);
-        Assert.assertFalse(checkbox2.isSelected());
-
-        driver.quit();
+        checkboxPage.uncheck(Checkbox.CHECKBOX2);
+        Assert.assertFalse(checkboxPage.isChecked(Checkbox.CHECKBOX2));
     }
 
     @Test

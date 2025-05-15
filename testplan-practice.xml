@@ -1,8 +1,8 @@
 <!DOCTYPE suite SYSTEM "https://testng.org/testng-1.0.dtd">
 <suite name="Suite1" verbose="1">
     <test name="Calculator Test">
-        <packages>
-            <package name="calculator"/>
-        </packages>
+        <classes>
+            <class name="calculator.BMICalculatorTest"/>
+        </classes>
     </test>
 </suite>

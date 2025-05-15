@@ -1,14 +1,12 @@
 package utils;
 
 import org.apache.commons.io.FileUtils;
-import org.openqa.selenium.By;
-import org.openqa.selenium.OutputType;
-import org.openqa.selenium.TakesScreenshot;
-import org.openqa.selenium.WebDriver;
+import org.openqa.selenium.*;
 import org.openqa.selenium.chrome.ChromeDriver;
 import org.openqa.selenium.chrome.ChromeOptions;
 import org.openqa.selenium.edge.EdgeDriver;
 import org.openqa.selenium.firefox.FirefoxDriver;
+import org.openqa.selenium.interactions.Actions;
 import org.openqa.selenium.safari.SafariDriver;
 import org.openqa.selenium.support.ui.ExpectedConditions;
 import org.openqa.selenium.support.ui.WebDriverWait;
@@ -55,6 +53,10 @@ public class Browser {
         return driver;
     }
 
+    public static Actions getActions() {
+        return new Actions(driver);
+    }
+
     public static void visit(String url) {
         driver.get(url);
     }
@@ -83,6 +85,12 @@ public class Browser {
         }
     }
 
+    public static void uncheck(By by) {
+        if (isSelected(by)) {
+            click(by);
+        }
+    }
+
     public static String getText(By by) {
         return wait.until(ExpectedConditions.visibilityOfElementLocated(by)).getText();
     }
@@ -101,6 +109,32 @@ public class Browser {
             throw new RuntimeException(e);
         }
     }
+
+    public static void dragAndDrop(By source, By target) {
+        getActions().dragAndDrop(driver.findElement(source), driver.findElement(target)).perform();
+    }
+
+    public static void slider(By by, int xOffset, int yOffset) {
+        WebElement slider = driver.findElement(by);
+
+        getActions().clickAndHold(slider)
+                .moveByOffset(xOffset, yOffset)
+                .release()
+                .perform();
+    }
+
+    public static void scrollInfinite(By by, int yOffset) {
+        getActions().scrollByAmount(0, yOffset).perform();
+    }
+
+    public static void rightClick(By by) {
+        getActions().contextClick(driver.findElement(by)).perform();
+    }
+
+    public static void doubleClick(By by) {
+        getActions().doubleClick(driver.findElement(by)).perform();
+    }
+
 
 }
 

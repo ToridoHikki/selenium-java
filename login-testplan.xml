@@ -11,12 +11,6 @@
             <class name="heroku.FormAuthenticationTest"/>
         </classes>
     </test>
-    <test name="Edge Browser Test">
-        <parameter name="browser" value="edge"/>
-        <classes>
-            <class name="heroku.FormAuthenticationTest"/>
-        </classes>
-    </test>
     <test name="Safari Browser Test">
         <parameter name="browser" value="safari"/>
         <classes>

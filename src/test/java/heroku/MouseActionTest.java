@@ -4,51 +4,48 @@ import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.chrome.ChromeDriver;
-import org.openqa.selenium.interactions.Action;
 import org.openqa.selenium.interactions.Actions;
 import org.openqa.selenium.support.ui.ExpectedConditions;
 import org.openqa.selenium.support.ui.WebDriverWait;
 import org.testng.Assert;
+import org.testng.annotations.AfterMethod;
+import org.testng.annotations.BeforeMethod;
 import org.testng.annotations.Test;
+import pages.mouse.DragAndDropPage;
+import pages.mouse.HorizontalSliderPage;
 
 import java.time.Duration;
 
+import static utils.Browser.*;
+
 public class MouseActionTest {
 
-    @Test
-    void dragAndDropVerify () throws  InterruptedException {
-        WebDriver driver = new ChromeDriver();
-        driver.get("https://the-internet.herokuapp.com/drag_and_drop");
+    DragAndDropPage dragAndDropPage = new DragAndDropPage();
 
-        Actions action = new Actions(driver);
-        WebElement source = driver.findElement(By.id("column-a"));
-        WebElement target = driver.findElement(By.id("column-b"));
-
-        action.dragAndDrop(source, target).perform();
-        Assert.assertTrue(driver.findElement(By.cssSelector("#column-a header")).getText().contains("B"));
-        Assert.assertTrue(driver.findElement(By.cssSelector("#column-b header")).getText().contains("A"));
-
-        driver.quit();
+    @BeforeMethod
+    void setup () {
+        openBrowser("chrome");
     }
+
+    @Test
+    void verifyDragAndDropPOM () throws  InterruptedException {
+        dragAndDropPage.open();
+        dragAndDropPage.dragAndDropTwoColumn("a", "b");
+        Assert.assertTrue(dragAndDropPage.getResultTextColumnB().contains("A"));
+        Assert.assertTrue(dragAndDropPage.getResultTextColumnA().contains("B"));
+    }
+
 
     @Test
     void horizontalSliderTest () throws InterruptedException {
 
-        WebDriver driver = new ChromeDriver();
-        driver.get("https://the-internet.herokuapp.com/horizontal_slider");
+        openBrowser("chrome");
 
-        Actions action = new Actions(driver);
-        WebElement slider = driver.findElement(By.cssSelector(".sliderContainer input[type=range]"));
-//        WebElement slider = driver.findElement(By.xpath("//input[@type='range']"));
+        HorizontalSliderPage horizontalSliderPage = new HorizontalSliderPage();
+        horizontalSliderPage.open();
 
-        action.clickAndHold(slider)
-                .moveByOffset((int) (slider.getSize().getWidth() * 0.1), 0)
-                .release()
-                .perform();
-
-        String range = driver.findElement(By.id("range")).getText();
-        Assert.assertEquals(range,"3");
-
+        horizontalSliderPage.setRange();
+        Assert.assertEquals(horizontalSliderPage.getRange(),"5");
     }
 
     @Test
@@ -76,8 +73,6 @@ public class MouseActionTest {
         String alertText = driver.switchTo().alert().getText();
         System.out.println("Alert text: " + alertText);
         driver.switchTo().alert().accept();
-
-        driver.quit();
     }
     @Test
     void verifyDynamicLoading(){
@@ -93,5 +88,10 @@ public class MouseActionTest {
                 .getText();
         Assert.assertTrue(finishText.contains("Hello World!"));
 
+    }
+
+    @AfterMethod
+    void tearDown() {
+        quit();
     }
 }

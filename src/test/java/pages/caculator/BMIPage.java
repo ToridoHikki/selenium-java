@@ -4,12 +4,6 @@ import org.openqa.selenium.By;
 import static utils.Browser.*;
 
 public class BMIPage {
-    /*
-    fill form
-    get result
-    clear form
-    select unitmetric
-     */
 
     public void open(){
         visit("https://www.calculator.net/bmi-calculator.html");

@@ -3,15 +3,16 @@ package heroku;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.chrome.ChromeDriver;
-import org.openqa.selenium.support.ui.ExpectedCondition;
 import org.openqa.selenium.support.ui.ExpectedConditions;
 import org.openqa.selenium.support.ui.WebDriverWait;
 import org.testng.Assert;
+import org.testng.annotations.AfterMethod;
 import org.testng.annotations.Test;
+import pages.mouse.HyperLinkPage;
 
 import java.time.Duration;
 
-import static org.openqa.selenium.support.ui.ExpectedCondition.*;
+import static utils.Browser.*;
 
 public class HyperLinkTest {
 
@@ -67,6 +68,26 @@ public class HyperLinkTest {
 
 
         driver.quit();
+
+    }
+
+    @Test
+    void verifyLinkGoToCorrectScreenWithPageObject() {
+        openBrowser("chrome");
+        HyperLinkPage hyperLinkPage = new HyperLinkPage();
+        hyperLinkPage.open();
+
+        hyperLinkPage.clickLinkText("here");
+        hyperLinkPage.clickLinkText("200");
+        Assert.assertTrue(hyperLinkPage.isPageLoaded("200"), "This page returned a 200 status code.");
+        Assert.assertEquals(getCurrentUrl(), "https://the-internet.herokuapp.com/status_codes/200");
+        hyperLinkPage.clickLinkText("here");
+    }
+
+
+    @AfterMethod
+    void tearDown() {
+        quit();
 
     }
 }
