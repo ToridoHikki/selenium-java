@@ -89,11 +89,11 @@ public class Main {
 
 }
 
-class console {
-    public static void log(String message) {
-        System.out.println(message);
-    }
-}
+//public class console {
+//    public static void log(String message) {
+//        System.out.println(message);
+//    }
+//}
 
 
 

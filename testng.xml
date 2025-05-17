@@ -1,0 +1,20 @@
+<suite name = "TVN Test Suite">
+    <test name = "Test method 1">
+        <classes>
+            <class name = "heroku.Annotation">
+                <methods>
+                    <include name = "testMethod1"/>
+                </methods>
+            </class>
+        </classes>
+    </test>
+    <test name = "Test method 2">
+        <classes>
+            <class name = "heroku.Annotation">
+                <methods>
+                    <include name = "testMethod2"/>
+                </methods>
+            </class>
+        </classes>
+    </test>
+</suite>
