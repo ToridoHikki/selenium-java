@@ -48,16 +48,6 @@ public class MouseActionTest {
 
         infiniteScrollPage.scroll(0, 100);
 
-
-//        WebDriver driver = new ChromeDriver();
-//        driver.get("https://the-internet.herokuapp.com/infinite_scroll");
-//
-//        Actions action = new Actions(driver);
-//        for (int i = 0; i < 5; i++) {
-//            action.scrollByAmount(0,100).perform();
-//            Thread.sleep(1000);
-//        }
-//        driver.quit();
     }
 
     @Test
