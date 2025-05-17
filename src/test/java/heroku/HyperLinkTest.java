@@ -46,7 +46,7 @@ public class HyperLinkTest {
     @Test
     void verify404LinkGoToCorrectScreen() {
         hyperLinkPage.clickLinkText("404");
-        Assert.assertTrue(hyperLinkPage.isPageLoaded("301"), "This page returned a 404 status code.");
+        Assert.assertTrue(hyperLinkPage.isPageLoaded("404"), "This page returned a 404 status code.");
         Assert.assertEquals(getCurrentUrl(), "https://the-internet.herokuapp.com/status_codes/404");
         hyperLinkPage.clickLinkText("here");
     }
