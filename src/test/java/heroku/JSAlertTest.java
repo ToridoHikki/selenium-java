@@ -4,72 +4,78 @@ import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.chrome.ChromeDriver;
 import org.testng.Assert;
+import org.testng.annotations.BeforeMethod;
 import org.testng.annotations.Test;
+import utils.Browser;
+
+import static utils.Browser.openBrowser;
+import static utils.Browser.visit;
 
 public class JSAlertTest {
+
+    @BeforeMethod
+    void setUp() {
+        openBrowser("chrome");
+    }
     @Test
     void verifyClickJSAlert(){
-        WebDriver driver = new ChromeDriver();
-        driver.get("https://the-internet.herokuapp.com/javascript_alerts");
+        visit("https://the-internet.herokuapp.com/javascript_alerts");
 
-        driver.findElement(By.xpath("//button[text()='Click for JS Alert']")).click();
+        Browser.getDriver().findElement(By.xpath("//button[text()='Click for JS Alert']")).click();
 
-        String alertText = driver.switchTo().alert().getText();
+        String alertText = Browser.getDriver().switchTo().alert().getText();
         System.out.println("Alert text: " + alertText);
-        driver.switchTo().alert().accept();
+        Browser.getDriver().switchTo().alert().accept();
 
-        String resultText = driver.findElement(By.id("result")).getText();
+        String resultText = Browser.getDriver().findElement(By.id("result")).getText();
         Assert.assertTrue(resultText.contains("You successfully clicked an alert"));
 
-        driver.quit();
+        Browser.getDriver().quit();
     }
 
     @Test
     void verifyJSConfirmWithDismiss(){
-        WebDriver driver = new ChromeDriver();
-        driver.get("https://the-internet.herokuapp.com/javascript_alerts");
-        driver.findElement(By.xpath("//button[text()='Click for JS Confirm']")).click();
+        visit("https://the-internet.herokuapp.com/javascript_alerts");
+        Browser.getDriver().findElement(By.xpath("//button[text()='Click for JS Confirm']")).click();
 
-        String alertText = driver.switchTo().alert().getText();
+        String alertText = Browser.getDriver().switchTo().alert().getText();
         System.out.println("Alert text: " + alertText);
-        driver.switchTo().alert().dismiss();
+        Browser.getDriver().switchTo().alert().dismiss();
 
-        String resultText = driver.findElement(By.id("result")).getText();
+        String resultText = Browser.getDriver().findElement(By.id("result")).getText();
         Assert.assertTrue(resultText.contains("You clicked: Cancel"));
 
-        driver.quit();
+        Browser.getDriver().quit();
     }
 
     @Test
     void verifyJSConfirmWithOK(){
-        WebDriver driver = new ChromeDriver();
-        driver.get("https://the-internet.herokuapp.com/javascript_alerts");
-        driver.findElement(By.xpath("//button[text()='Click for JS Confirm']")).click();
+        visit("https://the-internet.herokuapp.com/javascript_alerts");
+        Browser.getDriver().findElement(By.xpath("//button[text()='Click for JS Confirm']")).click();
 
-        String alertText = driver.switchTo().alert().getText();
+        String alertText = Browser.getDriver().switchTo().alert().getText();
         System.out.println("Alert text: " + alertText);
-        driver.switchTo().alert().accept();
+        Browser.getDriver().switchTo().alert().accept();
 
-        String resultText = driver.findElement(By.id("result")).getText();
+        String resultText = Browser.getDriver().findElement(By.id("result")).getText();
         Assert.assertTrue(resultText.contains("You clicked: Ok"));
 
-        driver.quit();
+        Browser.getDriver().quit();
     }
 
     @Test
     void verifyJSPrompt(){
-        WebDriver driver = new ChromeDriver();
-        driver.get("https://the-internet.herokuapp.com/javascript_alerts");
-        driver.findElement(By.xpath("//button[text()='Click for JS Prompt']")).click();
+        visit("https://the-internet.herokuapp.com/javascript_alerts");
+        Browser.getDriver().findElement(By.xpath("//button[text()='Click for JS Prompt']")).click();
 
-        String alertText = driver.switchTo().alert().getText();
+        String alertText = Browser.getDriver().switchTo().alert().getText();
         System.out.println("Alert text: " + alertText);
-        driver.switchTo().alert().sendKeys("Hello World");
-        driver.switchTo().alert().accept();
+        Browser.getDriver().switchTo().alert().sendKeys("Hello World");
+        Browser.getDriver().switchTo().alert().accept();
 
-        String resultText = driver.findElement(By.id("result")).getText();
+        String resultText = Browser.getDriver().findElement(By.id("result")).getText();
         Assert.assertTrue(resultText.contains("You entered: Hello World"));
 
-        driver.quit();
+        Browser.getDriver().quit();
     }
 }
