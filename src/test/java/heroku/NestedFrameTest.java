@@ -30,7 +30,7 @@ public class NestedFrameTest {
         Browser.getDriver().switchTo().frame("frame-right");
         Assert.assertTrue(Browser.getDriver().findElement(By.tagName("body")).getText().contains("RIGHT"));
 
-        Browser.getDriver().switchTo().parentFrame();
+        Browser.getDriver().switchTo().defaultContent();
         Browser.getDriver().switchTo().frame("frame-bottom");
         Assert.assertTrue(Browser.getDriver().findElement(By.tagName("body")).getText().contains("BOTTOM"));
 
