@@ -74,7 +74,7 @@ public class CaptureScreenshotWhenFail {
                 .map(Person1::getFullName)
                 .toList();
 
-        Assert.assertEquals(listPersonHaveMinDue, List.of("John Smitht", "Tim Conway"));
+        Assert.assertEquals(listPersonHaveMinDue, List.of("John Smith", "Tim Conway"));
     }
 
     @AfterMethod(alwaysRun = true)
