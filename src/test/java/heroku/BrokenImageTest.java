@@ -1,21 +1,22 @@
 package heroku;
 
 import org.openqa.selenium.By;
-import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
-import org.openqa.selenium.chrome.ChromeDriver;
 import org.testng.Assert;
 import org.testng.annotations.Test;
+import utils.Browser;
 
 import java.util.List;
+
+import static utils.Browser.openBrowser;
 
 public class BrokenImageTest {
     @Test
     void verifyBrokenImage(){
-        WebDriver driver = new ChromeDriver();
-        driver.get("https://the-internet.herokuapp.com/broken_images");
+        openBrowser("chrome");
+        Browser.getDriver().get("https://the-internet.herokuapp.com/broken_images");
 
-        List<WebElement> images = driver.findElements(By.cssSelector(".example img"));
+        List<WebElement> images = Browser.getDriver().findElements(By.cssSelector(".example img"));
         images.forEach(image -> {
             String imageUrl = image.getDomAttribute("src");
             String naturalWidth = image.getDomProperty("naturalWidth");
@@ -29,7 +30,7 @@ public class BrokenImageTest {
         Assert.assertEquals(images.get(0).getDomProperty("naturalWidth"), "0");
         Assert.assertEquals(images.get(1).getDomProperty("naturalWidth"), "0");
 
-        driver.quit();
+        Browser.getDriver().quit();
     }
 
 
