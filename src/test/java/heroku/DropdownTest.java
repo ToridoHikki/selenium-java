@@ -69,7 +69,7 @@ public class DropdownTest {
 
         Assert.assertFalse(Browser.getDriver().findElement(By.cssSelector("form#input-example input")).isEnabled());
 
-        Browser.getDriver().findElement(By.cssSelector("from#input-example button")).click();
+        Browser.getDriver().findElement(By.cssSelector("form#input-example button")).click();
 
         Assert.assertTrue(wait.until(ExpectedConditions.elementToBeClickable(By.cssSelector("form#input-example input"))).isEnabled());
     }
