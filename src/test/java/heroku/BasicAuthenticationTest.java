@@ -4,17 +4,24 @@ import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.chrome.ChromeDriver;
 import org.testng.Assert;
+import org.testng.annotations.AfterMethod;
 import org.testng.annotations.Test;
+import utils.Browser;
+
+import static utils.Browser.*;
 
 public class BasicAuthenticationTest {
     @Test
     void verifyLoginSuccessWithValidCredentials(){
-        WebDriver driver = new ChromeDriver();
-        driver.get("https://admin:admin@the-internet.herokuapp.com/basic_auth");
+        openBrowser("chrome");
+        visit("https://admin:admin@the-internet.herokuapp.com/basic_auth");
 
-        String welcomeMessage = driver.findElement(By.tagName("p")).getText();
+        String welcomeMessage = Browser.getDriver().findElement(By.tagName("p")).getText();
         Assert.assertTrue(welcomeMessage.contains("Congratulations! You must have the proper credentials."));
+    }
 
-        driver.quit();
+    @AfterMethod
+    void teardown(){
+        quit();
     }
 }
