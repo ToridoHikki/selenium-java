@@ -1,8 +1,6 @@
 package heroku;
 
 import org.openqa.selenium.By;
-import org.openqa.selenium.WebDriver;
-import org.openqa.selenium.chrome.ChromeDriver;
 import org.openqa.selenium.support.ui.ExpectedConditions;
 import org.openqa.selenium.support.ui.Select;
 import org.openqa.selenium.support.ui.WebDriverWait;
@@ -65,7 +63,7 @@ public class DropdownTest {
     }
 
     @Test
-    void verifyTextfieldDisabled () throws InterruptedException {
+    void verifyTextFieldDisabled() throws InterruptedException {
         Browser.getDriver().get("https://the-internet.herokuapp.com/dynamic_controls");
         WebDriverWait wait = new WebDriverWait(Browser.getDriver(), Duration.ofSeconds(10));
 
