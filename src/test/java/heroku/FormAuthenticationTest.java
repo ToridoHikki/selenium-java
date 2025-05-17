@@ -18,6 +18,7 @@ public class FormAuthenticationTest extends TestBase {
     void setup(String browser) {
         openBrowser(browser);
         formAuthenticationPage = new FormAuthenticationPage();
+        formAuthenticationPage.open();
     }
     @Test
     void verifyForm() throws InterruptedException {
