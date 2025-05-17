@@ -47,7 +47,7 @@ public class TableTest {
 
         System.out.println("maxDuePersonsFullName = " + maxDuePersonsFullName);
 
-        Assert.assertEquals(maxDuePersonsFullName, List.of("Jason Doe"));
+        Assert.assertEquals(maxDuePersonsFullName, List.of("Doe Jason"));
 
 
 
