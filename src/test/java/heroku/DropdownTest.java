@@ -48,7 +48,7 @@ public class DropdownTest {
         Select select = new Select(Browser.getDriver().findElement(By.id("dropdown")));
 
         select.selectByContainsVisibleText("Option 1");
-        Assert.assertTrue(Browser.getDriver().findElement(By.xpath("//optiion[.='Option 1']")).isDisplayed());
+        Assert.assertTrue(Browser.getDriver().findElement(By.xpath("//option[.='Option 1']")).isDisplayed());
 
         select.selectByValue("1");
         Assert.assertTrue(Browser.getDriver().findElement(By.cssSelector("option[value='1']")).isDisplayed());
