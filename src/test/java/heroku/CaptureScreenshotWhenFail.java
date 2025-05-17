@@ -9,6 +9,7 @@ import org.openqa.selenium.chrome.ChromeDriver;
 import org.testng.Assert;
 import org.testng.ITestResult;
 import org.testng.annotations.*;
+import utils.Browser;
 
 import java.io.File;
 import java.io.IOException;
@@ -18,11 +19,9 @@ import java.util.Comparator;
 import java.util.List;
 import java.util.stream.Collectors;
 
-import static utils.Browser.openBrowser;
-import static utils.Browser.visit;
+import static utils.Browser.*;
 
 public class CaptureScreenshotWhenFail {
-    WebDriver driver;
     List<Person1> personList;
 
     @BeforeClass
@@ -30,7 +29,7 @@ public class CaptureScreenshotWhenFail {
         openBrowser("chrome");
         visit("https://the-internet.herokuapp.com/tables");
         personList = new ArrayList<>();
-        driver.findElements(By.xpath("//table[@id='table1']/tbody/tr"))
+        Browser.getDriver().findElements(By.xpath("//table[@id='table1']/tbody/tr"))
                 .forEach(row -> {
                     String lastName = row.findElement(By.xpath("./td[1]")).getText();
                     String firstName = row.findElement(By.xpath("./td[2]")).getText();
@@ -41,7 +40,7 @@ public class CaptureScreenshotWhenFail {
 
     @Test
     void tc05() {
-        List<Double> dueList = driver
+        List<Double> dueList = Browser.getDriver()
                 .findElements(By.xpath("//table[@id='table1']/tbody/tr/td[4]"))
                 .stream()
                 .map(cell -> Double.valueOf(cell.getText().replace("$", "")))
@@ -50,8 +49,8 @@ public class CaptureScreenshotWhenFail {
         double maxDue = Collections.max(dueList);
         int rowIndex = dueList.indexOf(maxDue) + 1; // +1 because xpath is 1-based index
 
-        String lastName = driver.findElement(By.xpath(String.format("//table[@id='table1']/tbody/tr[%d]/td[1]", rowIndex))).getText();
-        String firstName = driver.findElement(By.xpath(String.format("//table[@id='table1']/tbody/tr[%d]/td[2]", rowIndex))).getText();
+        String lastName = Browser.getDriver().findElement(By.xpath(String.format("//table[@id='table1']/tbody/tr[%d]/td[1]", rowIndex))).getText();
+        String firstName = Browser.getDriver().findElement(By.xpath(String.format("//table[@id='table1']/tbody/tr[%d]/td[2]", rowIndex))).getText();
 
         Assert.assertEquals(String.format("%s %s", firstName, lastName), "Jason Doe");
     }
@@ -81,7 +80,7 @@ public class CaptureScreenshotWhenFail {
     @AfterMethod(alwaysRun = true)
     void captureScreenshot(ITestResult testResult) {
         if (!testResult.isSuccess()) {
-            TakesScreenshot takesScreenshot = (TakesScreenshot) driver;
+            TakesScreenshot takesScreenshot = (TakesScreenshot) Browser.getDriver();
             File srcFile = takesScreenshot.getScreenshotAs(OutputType.FILE);
             File destFile = new File(String.format("target/screenshot-%s-%s.png", testResult.getName(), System.currentTimeMillis()));
             try {
@@ -94,7 +93,7 @@ public class CaptureScreenshotWhenFail {
 
     @AfterClass(alwaysRun = true)
     void tearDown() {
-        driver.quit();
+        quit();
     }
 
 }
