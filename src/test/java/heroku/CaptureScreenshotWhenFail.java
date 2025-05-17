@@ -18,14 +18,17 @@ import java.util.Comparator;
 import java.util.List;
 import java.util.stream.Collectors;
 
+import static utils.Browser.openBrowser;
+import static utils.Browser.visit;
+
 public class CaptureScreenshotWhenFail {
     WebDriver driver;
     List<Person1> personList;
 
     @BeforeClass
     void setUp() {
-        driver = new ChromeDriver();
-        driver.get("https://the-internet.herokuapp.com/tables");
+        openBrowser("chrome");
+        visit("https://the-internet.herokuapp.com/tables");
         personList = new ArrayList<>();
         driver.findElements(By.xpath("//table[@id='table1']/tbody/tr"))
                 .forEach(row -> {
