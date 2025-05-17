@@ -1,27 +1,27 @@
 package heroku;
 
 import org.openqa.selenium.By;
-import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
-import org.openqa.selenium.chrome.ChromeDriver;
 import org.testng.Assert;
 import org.testng.annotations.Test;
 import pages.mouse.TablePage;
+import utils.Browser;
 
 import java.util.List;
 import java.util.OptionalDouble;
 
 import static utils.Browser.openBrowser;
+import static utils.Browser.visit;
 
 public class TableTest {
 
     @Test
     void verifyMaxDuePerson () throws InterruptedException {
 
-        WebDriver driver = new ChromeDriver();
-        driver.get("https://the-internet.herokuapp.com/tables");
+        openBrowser("chrome");
+        visit("https://the-internet.herokuapp.com/tables");
 
-        List<Person> people = driver
+        List<Person> people = Browser.getDriver()
                 .findElements(By.xpath("//table[@id='table1']/tbody/tr"))
                 .stream()
                 .map(WebElement::getText)
@@ -78,11 +78,11 @@ public class TableTest {
     @Test
     void verifyMinDuePerson () throws InterruptedException {
 
-        WebDriver driver = new ChromeDriver();
-        driver.get("https://the-internet.herokuapp.com/tables");
+        openBrowser("chrome");
+        visit("https://the-internet.herokuapp.com/tables");
 
         //Todo: tao 1 list Person lấy text của tất cả các row
-        List<Person> people = driver
+        List<Person> people = Browser.getDriver()
                 .findElements(By.xpath("//table[@id='table2']/tbody/tr"))
                 .stream()
                 //Lay text cua tat ca cac row
