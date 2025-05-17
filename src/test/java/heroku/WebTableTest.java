@@ -6,9 +6,13 @@ import org.openqa.selenium.WebElement;
 import org.openqa.selenium.chrome.ChromeDriver;
 import org.testng.Assert;
 import org.testng.annotations.Test;
+import utils.Browser;
 
 import java.util.*;
 import java.util.stream.Collectors;
+
+import static utils.Browser.openBrowser;
+import static utils.Browser.visit;
 
 public class WebTableTest {
     //    Open browser
@@ -19,8 +23,8 @@ public class WebTableTest {
 
     void verifyTable () throws InterruptedException {
 
-        WebDriver driver = new ChromeDriver();
-        driver.get("https://the-internet.herokuapp.com/tables");
+        openBrowser("chrome");
+        visit("https://the-internet.herokuapp.com/tables");
         /**
          *    1. get row index of max due -> get last name/first name
          *         due column xpath //table[@id='table1']/tbody/tr/td[4]
@@ -28,7 +32,7 @@ public class WebTableTest {
          *         first name column xpath //table[@id='table1']/tbody/tr[row_index]/td[2]
          */
 
-        List <Double> dueList = driver.findElements(By.xpath("//table[@id='table1']/tbody/tr/td[4]"))
+        List <Double> dueList = Browser.getDriver().findElements(By.xpath("//table[@id='table1']/tbody/tr/td[4]"))
                 .stream()
                 .map(cell -> Double.valueOf(cell.getText().replace("$","")))
                 .collect(Collectors.toList());
@@ -39,10 +43,10 @@ public class WebTableTest {
         System.out.println("max " + maxDue);
         int rowIndex = dueList.indexOf(maxDue) + 1;
 
-        String lastName = driver
+        String lastName = Browser.getDriver()
                 .findElement(By.xpath("//table[@id='table1']/tbody/tr[" + rowIndex + "]/td[1]"))
                 .getText();
-        String firstName = driver
+        String firstName = Browser.getDriver()
                 .findElement(By.xpath("//table[@id='table1']/tbody/tr[" + rowIndex + "]/td[2]"))
                 .getText();
 
@@ -52,8 +56,8 @@ public class WebTableTest {
     @Test
     void verifyMinDuePerson () throws InterruptedException {
 
-        WebDriver driver = new ChromeDriver();
-        driver.get("https://the-internet.herokuapp.com/tables");
+        openBrowser("chrome");
+        visit("https://the-internet.herokuapp.com/tables");
 
         /**
          * 1.tao list tat ca cac due
@@ -65,7 +69,7 @@ public class WebTableTest {
 
         //todo: tao 1 list  lay tat ca row cua tat ca cac row
 
-        List<String> rowsList = driver
+        List<String> rowsList = Browser.getDriver()
                 .findElements(By.xpath("//table[@id='table2']/tbody/tr"))
                 .stream()
                 .map(WebElement::getText)
