@@ -1,14 +1,10 @@
 package heroku;
 
-import org.openqa.selenium.By;
-import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
-import org.openqa.selenium.chrome.ChromeDriver;
 import org.testng.Assert;
 import org.testng.annotations.AfterMethod;
 import org.testng.annotations.Test;
-import pages.heroku.CheckboxPage;
-import pages.moatazeldebsy.CheckboxesPage;
+import pages.moatazeldebsy.CheckboxPage;
 
 import static utils.Browser.*;
 
@@ -28,7 +24,7 @@ public class CheckboxTest {
 //        Check on checkbox2
 //        Verify checkbox2 is checked
         openBrowser("chrome");
-        CheckboxPage checkboxPage = new CheckboxPage();
+        pages.heroku.CheckboxPage checkboxPage = new pages.heroku.CheckboxPage();
         checkboxPage.open();
 
         checkboxPage.check("1");
@@ -47,44 +43,44 @@ public class CheckboxTest {
     @Test
     void verify3CheckBox() throws InterruptedException {
         openBrowser("chrome");
-        CheckboxesPage checkboxesPage= new CheckboxesPage();
-        checkboxesPage.open();
+        pages.moatazeldebsy.CheckboxPage checkboxPage = new pages.moatazeldebsy.CheckboxPage();
+        checkboxPage.open();
 
-        checkboxesPage.checkAll();
-        Assert.assertTrue(checkboxesPage.isChecked("1"));
-        Assert.assertTrue(checkboxesPage.isChecked("2"));
-        Assert.assertTrue(checkboxesPage.isChecked("3"));
+        checkboxPage.checkAll();
+        Assert.assertTrue(checkboxPage.isChecked("1"));
+        Assert.assertTrue(checkboxPage.isChecked("2"));
+        Assert.assertTrue(checkboxPage.isChecked("3"));
 
-        checkboxesPage.uncheckAll();
-        Assert.assertFalse(checkboxesPage.isChecked("1"));
-        Assert.assertFalse(checkboxesPage.isChecked("2"));
-        Assert.assertFalse(checkboxesPage.isChecked("3"));
+        checkboxPage.uncheckAll();
+        Assert.assertFalse(checkboxPage.isChecked("1"));
+        Assert.assertFalse(checkboxPage.isChecked("2"));
+        Assert.assertFalse(checkboxPage.isChecked("3"));
     }
 
     @Test
     void verifyCheckAllButtonWorking () throws InterruptedException {
         openBrowser("chrome");
-        CheckboxesPage checkboxesPage = new CheckboxesPage();
-        checkboxesPage.open();
+        CheckboxPage checkboxPage = new CheckboxPage();
+        checkboxPage.open();
 
-        checkboxesPage.checkAll();
-        Assert.assertTrue(checkboxesPage.isChecked("1"));
-        Assert.assertTrue(checkboxesPage.isChecked("2"));
-        Assert.assertTrue(checkboxesPage.isChecked("3"));
+        checkboxPage.checkAll();
+        Assert.assertTrue(checkboxPage.isChecked("1"));
+        Assert.assertTrue(checkboxPage.isChecked("2"));
+        Assert.assertTrue(checkboxPage.isChecked("3"));
 
     }
 
     @Test
     void verifyUncheckAllButtonWorking () throws InterruptedException {
         openBrowser("chrome");
-        CheckboxesPage checkboxesPage= new CheckboxesPage();
-        checkboxesPage.open();
+        CheckboxPage checkboxPage = new CheckboxPage();
+        checkboxPage.open();
 
-        checkboxesPage.checkAll();
-        checkboxesPage.uncheckAll();
-        Assert.assertFalse(checkboxesPage.isChecked("1"));
-        Assert.assertFalse(checkboxesPage.isChecked("2"));
-        Assert.assertFalse(checkboxesPage.isChecked("3"));
+        checkboxPage.checkAll();
+        checkboxPage.uncheckAll();
+        Assert.assertFalse(checkboxPage.isChecked("1"));
+        Assert.assertFalse(checkboxPage.isChecked("2"));
+        Assert.assertFalse(checkboxPage.isChecked("3"));
     }
 
     private void check(WebElement checkbox) {

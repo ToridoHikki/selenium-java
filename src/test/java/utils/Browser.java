@@ -123,6 +123,13 @@ public class Browser {
                 .perform();
     }
 
+    public static void scroll(int xOffset, int yOffset) {
+        getActions()
+                .scrollByAmount(xOffset, yOffset)
+                .perform();
+
+    }
+
     public static void scrollInfinite(By by, int yOffset) {
         getActions().scrollByAmount(0, yOffset).perform();
     }
@@ -133,6 +140,10 @@ public class Browser {
 
     public static void doubleClick(By by) {
         getActions().doubleClick(driver.findElement(by)).perform();
+    }
+
+    public static String getAlertText() {
+       return driver.switchTo().alert().getText();
     }
 
 

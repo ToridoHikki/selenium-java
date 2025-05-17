@@ -6,10 +6,12 @@ import org.openqa.selenium.WebElement;
 import org.openqa.selenium.chrome.ChromeDriver;
 import org.testng.Assert;
 import org.testng.annotations.Test;
+import pages.mouse.TablePage;
 
 import java.util.List;
-import java.util.Optional;
 import java.util.OptionalDouble;
+
+import static utils.Browser.openBrowser;
 
 public class TableTest {
 
@@ -56,6 +58,24 @@ public class TableTest {
     }
 
     @Test
+    public void verifyMaxDuePersonPOM() {
+        openBrowser("chrome");
+        TablePage tablePage = new TablePage();
+        tablePage.open();
+
+        Assert.assertEquals(tablePage.getMaxDuePersonsFullName(), List.of("Doe Jason"));
+    }
+
+    @Test
+    public void verifyMinDuePersonPOM() {
+        openBrowser("chrome");
+        TablePage tablePage = new TablePage();
+        tablePage.open();
+
+        Assert.assertEquals(tablePage.getMinDuePersonsFullName(), List.of("Smith John", "Conway Tim"));
+    }
+
+    @Test
     void verifyMinDuePerson () throws InterruptedException {
 
         WebDriver driver = new ChromeDriver();
@@ -74,17 +94,23 @@ public class TableTest {
                 //chuyen ve list
                 .toList();
 
+        System.out.println("List people = " + people);
+
         //Todo: tim minDue trong due
         OptionalDouble minDue = people
                 .stream()
                 .mapToDouble(p -> p.getDue())
                 .min();
 
+        System.out.println("OptionalDouble mindue = " + minDue);
+
         //Todo: tim person co min due
         List<Person> minDuePersons = people
                 .stream()
                 .filter(p -> p.getDue() == minDue.getAsDouble())
                 .toList();
+
+        System.out.println("List minDuePersons = " + minDuePersons);
 
 
         //Todo: verify

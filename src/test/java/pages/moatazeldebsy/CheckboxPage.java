@@ -6,7 +6,7 @@ import utils.Browser;
 import static utils.Browser.click;
 import static utils.Browser.visit;
 
-public class CheckboxesPage {
+public class CheckboxPage {
 
     public void open() {
         visit("https://moatazeldebsy.github.io/test-automation-practices/#/checkboxes");

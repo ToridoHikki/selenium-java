@@ -1,8 +1,6 @@
 package pages.mouse;
 
 import org.openqa.selenium.By;
-import org.openqa.selenium.WebElement;
-import org.openqa.selenium.interactions.Actions;
 import utils.Browser;
 
 import static utils.Browser.visit;

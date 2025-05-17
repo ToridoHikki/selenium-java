@@ -7,7 +7,6 @@ import pages.heroku.FormAuthenticationPage;
 
 import static utils.Browser.*;
 
-//import static com.sun.org.apache.xpath.internal.compiler.Token.contains;
 
 public class FormAuthenticationTest extends TestBase {
 
