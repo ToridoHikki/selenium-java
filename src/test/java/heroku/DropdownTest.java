@@ -2,12 +2,12 @@ package heroku;
 
 import org.openqa.selenium.By;
 import org.openqa.selenium.support.ui.ExpectedConditions;
-import org.openqa.selenium.support.ui.Select;
 import org.openqa.selenium.support.ui.WebDriverWait;
 import org.testng.Assert;
 import org.testng.annotations.AfterMethod;
 import org.testng.annotations.BeforeMethod;
 import org.testng.annotations.Test;
+import pages.heroku.DropdownPage;
 import utils.Browser;
 
 import java.time.Duration;
@@ -43,18 +43,14 @@ public class DropdownTest {
 
     @Test
     void verifyDropdownWorking() throws InterruptedException {
-        visit("https://the-internet.herokuapp.com/dropdown");
+        DropdownPage dropdownPage = new DropdownPage();
+        dropdownPage.open();
 
-        Select select = new Select(Browser.getDriver().findElement(By.id("dropdown")));
+        dropdownPage.selectOption("Option 1");
+        Assert.assertTrue(dropdownPage.isOptionDisplay("Option 1"));
 
-        select.selectByContainsVisibleText("Option 1");
-        Assert.assertTrue(Browser.getDriver().findElement(By.xpath("//option[.='Option 1']")).isDisplayed());
-
-        select.selectByValue("1");
-        Assert.assertTrue(Browser.getDriver().findElement(By.cssSelector("option[value='1']")).isDisplayed());
-
-        select.selectByIndex(1);
-        Assert.assertTrue(Browser.getDriver().findElement(By.xpath("//select/option[1]")).isDisplayed());
+        dropdownPage.selectOptionByValue("1");
+        Assert.assertTrue(dropdownPage.isOptionDisplayByValue("1"));
     }
 
     @Test

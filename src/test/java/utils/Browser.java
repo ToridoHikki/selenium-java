@@ -9,6 +9,7 @@ import org.openqa.selenium.firefox.FirefoxDriver;
 import org.openqa.selenium.interactions.Actions;
 import org.openqa.selenium.safari.SafariDriver;
 import org.openqa.selenium.support.ui.ExpectedConditions;
+import org.openqa.selenium.support.ui.Select;
 import org.openqa.selenium.support.ui.WebDriverWait;
 
 import java.io.File;
@@ -57,6 +58,10 @@ public class Browser {
         return new Actions(driver);
     }
 
+    public static Select getSelect(By by) {
+        return new Select(driver.findElement(by));
+    }
+
     public static void visit(String url) {
         driver.get(url);
     }
@@ -77,6 +82,10 @@ public class Browser {
 
     public static boolean isSelected(By by) {
         return driver.findElement(by).isSelected();
+    }
+
+    public static boolean isDisplayed(By by) {
+        return driver.findElement(by).isDisplayed();
     }
 
     public static void check(By by) {
