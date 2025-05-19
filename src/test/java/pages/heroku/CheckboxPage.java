@@ -1,6 +1,5 @@
 package pages.heroku;
 
-import heroku.Checkbox;
 import org.openqa.selenium.By;
 import utils.Browser;
 
@@ -12,19 +11,6 @@ public class CheckboxPage {
         // Open the Checkboxes page
         visit("https://the-internet.herokuapp.com/checkboxes");
     }
-
-//    public void check(Checkbox checkboxName) {
-//        Browser.check(checkboxName.getLocator());
-//    }
-//
-//    public void uncheck(Checkbox checkboxName) {
-//        Browser.uncheck(checkboxName.getLocator());
-//    }
-//
-//    public boolean isChecked(Checkbox checkboxName) {
-//        return Browser.isSelected(checkboxName.getLocator());
-//    }
-
     public void check(String checkboxName){
         Browser.check(By.cssSelector(String.format("input[type=checkbox]:nth-child(%s)", checkboxName)));
     }
