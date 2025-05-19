@@ -146,6 +146,17 @@ public class Browser {
        return driver.switchTo().alert().getText();
     }
 
+    public void ClearBrowserCache()
+    {
+        driver.manage().deleteAllCookies();// Before
+        // After
+        try {
+            Thread.sleep(7000);
+        } catch (InterruptedException e) {
+            Thread.currentThread().interrupt();
+        }
+    }
+
 
 }
 
